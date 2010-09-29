@@ -11,7 +11,7 @@
  *	jquery.ui.core.js
  *	jquery.ui.widget.js
  */
-(function( $, undefined ) {
+(function( $ ) {
 
 $.widget( "ui.accordion", {
 	options: {
@@ -98,7 +98,7 @@ $.widget( "ui.accordion", {
 
 		self._createIcons();
 		self.resize();
-		
+
 		// ARIA
 		self.element.attr( "role", "tablist" );
 
@@ -190,7 +190,7 @@ $.widget( "ui.accordion", {
 
 	_setOption: function( key, value ) {
 		$.Widget.prototype._setOption.apply( this, arguments );
-			
+
 		if ( key == "active" ) {
 			this.activate( value );
 		}

@@ -10,7 +10,7 @@
  * Depends:
  *	jquery.effects.core.js
  */
-(function( $, undefined ) {
+(function( $ ) {
 
 $.effects.explode = function(o) {
 
@@ -64,7 +64,8 @@ $.effects.explode = function(o) {
 	setTimeout(function() {
 
 		o.options.mode == 'show' ? el.css({ visibility: 'visible' }) : el.css({ visibility: 'visible' }).hide();
-				if(o.callback) o.callback.apply(el[0]); // Callback
+				if(o.callback){o.callback.apply(el[0]); // Callback
+}
 				el.dequeue();
 
 				$('div.ui-effects-explode').remove();

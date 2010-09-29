@@ -10,7 +10,7 @@
  * Depends:
  *	jquery.effects.core.js
  */
-(function( $, undefined ) {
+(function( $ ) {
 
 $.effects.slide = function(o) {
 
@@ -26,10 +26,11 @@ $.effects.slide = function(o) {
 		// Adjust
 		$.effects.save(el, props); el.show(); // Save & Show
 		$.effects.createWrapper(el).css({overflow:'hidden'}); // Create Wrapper
-		var ref = (direction == 'up' || direction == 'down') ? 'top' : 'left';
-		var motion = (direction == 'up' || direction == 'left') ? 'pos' : 'neg';
+		var ref = ((direction == 'up') || (direction == 'down')) ? 'top' : 'left';
+		var motion = ((direction == 'up') || (direction == 'left')) ? 'pos' : 'neg';
 		var distance = o.options.distance || (ref == 'top' ? el.outerHeight({margin:true}) : el.outerWidth({margin:true}));
-		if (mode == 'show') el.css(ref, motion == 'pos' ? -distance : distance); // Shift
+		if (mode == 'show'){el.css(ref, motion == 'pos' ? -distance : distance); // Shift
+}
 
 		// Animation
 		var animation = {};
@@ -37,9 +38,11 @@ $.effects.slide = function(o) {
 
 		// Animate
 		el.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
-			if(mode == 'hide') el.hide(); // Hide
+			if(mode == 'hide'){el.hide(); // Hide
+}
 			$.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
-			if(o.callback) o.callback.apply(this, arguments); // Callback
+			if(o.callback){o.callback.apply(this, arguments); // Callback
+}
 			el.dequeue();
 		}});
 

@@ -10,7 +10,7 @@
  * Depends:
  *	jquery.effects.core.js
  */
-(function( $, undefined ) {
+(function( $ ) {
 
 $.effects.blind = function(o) {
 
@@ -28,7 +28,8 @@ $.effects.blind = function(o) {
 		var wrapper = $.effects.createWrapper(el).css({overflow:'hidden'}); // Create Wrapper
 		var ref = (direction == 'vertical') ? 'height' : 'width';
 		var distance = (direction == 'vertical') ? wrapper.height() : wrapper.width();
-		if(mode == 'show') wrapper.css(ref, 0); // Shift
+		if(mode == 'show'){wrapper.css(ref, 0); // Shift
+}
 
 		// Animation
 		var animation = {};
@@ -36,9 +37,11 @@ $.effects.blind = function(o) {
 
 		// Animate
 		wrapper.animate(animation, o.duration, o.options.easing, function() {
-			if(mode == 'hide') el.hide(); // Hide
+			if(mode == 'hide'){el.hide(); // Hide
+}
 			$.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
-			if(o.callback) o.callback.apply(el[0], arguments); // Callback
+			if(o.callback){o.callback.apply(el[0], arguments); // Callback
+}
 			el.dequeue();
 		});
 

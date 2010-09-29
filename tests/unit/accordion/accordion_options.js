@@ -8,7 +8,7 @@ module("accordion: options");
 test("{ active: first child }, default", function() {
 	var ac = $("#list1").accordion();
 	equals( ac.accordion('option', 'active'), 0);
-	state(ac, 1, 0, 0)
+	state(ac, 1, 0, 0);
 });
 
 test("{ active: Selector }", function() {
@@ -75,9 +75,9 @@ test("{ autoHeight: false }", function() {
 	accordion.find(".ui-accordion-content").each(function() {
 		sizes.push($(this).height());
 	});
-	ok( sizes[0] >= 70 && sizes[0] <= 90, "was " + sizes[0] );
-	ok( sizes[1] >= 98 && sizes[1] <= 126, "was " + sizes[1] );
-	ok( sizes[2] >= 42 && sizes[2] <= 54, "was " + sizes[2] );
+	ok( (sizes[0] >= 70) && (sizes[0] <= 90), "was " + sizes[0] );
+	ok( (sizes[1] >= 98) && (sizes[1] <= 126), "was " + sizes[1] );
+	ok( (sizes[2] >= 42) && (sizes[2] <= 54), "was " + sizes[2] );
 });
 
 test("{ collapsible: false }, default", function() {

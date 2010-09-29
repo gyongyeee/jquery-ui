@@ -10,7 +10,7 @@
  * Depends:
  *	jquery.effects.core.js
  */
-(function( $, undefined ) {
+(function( $ ) {
 
 $.effects.clip = function(o) {
 
@@ -41,9 +41,11 @@ $.effects.clip = function(o) {
 
 		// Animate
 		animate.animate(animation, { queue: false, duration: o.duration, easing: o.options.easing, complete: function() {
-			if(mode == 'hide') el.hide(); // Hide
+			if(mode == 'hide'){el.hide(); // Hide
+}
 			$.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
-			if(o.callback) o.callback.apply(el[0], arguments); // Callback
+			if(o.callback){o.callback.apply(el[0], arguments); // Callback
+}
 			el.dequeue();
 		}});
 

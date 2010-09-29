@@ -7,7 +7,7 @@
  *
  * http://docs.jquery.com/UI/Widget
  */
-(function( $, undefined ) {
+(function( $ ) {
 
 // jQuery 1.4+
 if ( $.cleanData ) {
@@ -245,8 +245,8 @@ $.Widget.prototype = {
 
 		this.element.trigger( event, data );
 
-		return !( $.isFunction(callback) &&
-			callback.call( this.element[0], event, data ) === false ||
+		return !( ($.isFunction(callback) &&
+			callback.call( this.element[0], event, data ) === false) ||
 			event.isDefaultPrevented() );
 	}
 };

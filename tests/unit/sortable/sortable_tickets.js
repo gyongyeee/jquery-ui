@@ -13,12 +13,12 @@ var drag = function(handle, dx, dy) {
 	});
 	dragged = { dx: dx, dy: dy };
 	offsetAfter = $(handle).offset();
-}
+};
 
 var sort = function(handle, dx, dy, index, msg) {
 	drag(handle, dx, dy);
 	equals($(handle).parent().children().index(handle), index, msg);
-}
+};
 
 module("sortable: tickets");
 

@@ -13,12 +13,12 @@ var drag = function(handle, dx, dy) {
 	});
 	dragged = { dx: dx, dy: dy };
 	offsetAfter = $(handle).offset();
-}
+};
 
 var sort = function(handle, dx, dy, index, msg) {
 	drag(handle, dx, dy);
 	equals($(handle).parent().children().index(handle), index, msg);
-}
+};
 
 module("sortable: methods");
 
@@ -77,7 +77,7 @@ test("enable", function() {
 	equals(el.sortable("option", "disabled"), false, "disabled option setter");
 
 	sort($("li", el)[0], 0, 40, 2, '.sortable("option", "disabled", false)');
-	
+
 	var expected = $('<div></div>').sortable(),
 		actual = expected.sortable('enable');
 	equals(actual, expected, 'enable is chainable');
@@ -99,7 +99,7 @@ test("disable", function() {
 	equals(el.sortable("option", "disabled"), true, "disabled option setter");
 	ok(el.sortable("widget").is(":not(.ui-state-disabled)"), "sortable element does not get ui-state-disabled since it's an interaction");
 	sort($("li", el)[0], 0, 40, 0, '.sortable("option", "disabled", true)');
-	
+
 	var expected = $('<div></div>').sortable(),
 		actual = expected.sortable('disable');
 	equals(actual, expected, 'disable is chainable');

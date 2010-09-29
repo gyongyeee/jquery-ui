@@ -68,13 +68,13 @@ $(function() {
 	$("#removeClass").click(function() {
 		$(this).addClass("current").removeClass(function() {
 			window.console && console.log(arguments);
-			return "current"
+			return "current";
 		}, 1000);
 	});
 	$("#toggleClass").click(function() {
 		$(this).toggleClass(function() {
 			window.console && console.log(arguments);
-			return "current"
+			return "current";
 		}, 1000);
 	});
 });

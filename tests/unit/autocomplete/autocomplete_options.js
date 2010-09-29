@@ -10,7 +10,7 @@ module("autocomplete: options", {
 });
 
 
-/* disabled until autocomplete actually has built-in support for caching 
+/* disabled until autocomplete actually has built-in support for caching
 // returns at most 4 items
 function source(request) {
 	ok(true, "handling a request");
@@ -39,7 +39,7 @@ function search(input) {
 	autocomplete.close();
 	autocomplete.search("schi");
 }
-	
+
 test("cache: default", function() {
 	expect(2);
 	search($("#autocomplete").autocomplete({
@@ -83,7 +83,7 @@ test( "appendTo", function() {
 		appendTo: ".ac-wrap"
 	});
 	same( ac.autocomplete( "widget" ).parent()[0], $( "#ac-wrap1" )[0], "class" );
-	same( $( "#ac-wrap2 .ui-autocomplete").length, 0, "class - only appends to one element")
+	same( $( "#ac-wrap2 .ui-autocomplete").length, 0, "class - only appends to one element");
 	ac.autocomplete( "destroy" );
 
 	ac.autocomplete({
@@ -91,7 +91,7 @@ test( "appendTo", function() {
 	});
 	same( ac.autocomplete( "widget" ).parent()[0], document.body, "null" );
 	ac.autocomplete( "destroy" );
-	
+
 	ac.autocomplete().autocomplete( "option", "appendTo", "#ac-wrap1" );
 	same( ac.autocomplete( "widget" ).parent()[0], $( "#ac-wrap1" )[0], "modified after init" );
 	ac.autocomplete( "destroy" );
@@ -104,15 +104,15 @@ test("delay", function() {
 		delay: 50
 	});
 	ac.val("ja").keydown();
-	
+
 	same( $(".ui-menu:visible").length, 0 );
-	
+
 	// wait half a second for the default delay to open the menu
 	stop();
 	setTimeout(function() {
 		same( $(".ui-menu:visible").length, 1 );
 		ac.autocomplete("destroy");
-		start();		
+		start();
 	}, 100);
 });
 
@@ -123,9 +123,9 @@ test("disabled", function() {
 		disabled: true
 	});
 	ac.val("ja").keydown();
-	
+
 	same( $(".ui-menu:visible").length, 0 );
-	
+
 	stop();
 	setTimeout(function() {
 		same( $(".ui-menu:visible").length, 0 );
@@ -140,7 +140,7 @@ test("minLength", function() {
 	});
 	ac.autocomplete("search", "");
 	same( $(".ui-menu:visible").length, 0, "blank not enough for minLength: 1" );
-	
+
 	ac.autocomplete("option", "minLength", 0);
 	ac.autocomplete("search", "");
 	same( $(".ui-menu:visible").length, 1, "blank enough for minLength: 0" );

@@ -20,7 +20,7 @@ test("init", function() {
 	$("<div></div>").selectable().selectable("foo").remove();
 	ok(true, 'arbitrary method called after init');
 
-	el = $("<div></div>").selectable()
+	el = $("<div></div>").selectable();
 	var foo = el.selectable("option", "foo");
 	el.remove();
 	ok(true, 'arbitrary option getter after init');
@@ -62,7 +62,7 @@ test("enable", function() {
 	el.simulate("drag", 20, 20);
 	equals(fired, true, "start fired");
 	el.selectable("destroy");
-	
+
 	var expected = $('<div></div>').selectable(),
 		actual = expected.selectable('enable');
 	equals(actual, expected, 'enable is chainable');
@@ -84,7 +84,7 @@ test("disable", function() {
 	el.simulate("drag", 20, 20);
 	equals(fired, false, "start fired");
 	el.selectable("destroy");
-	
+
 	var expected = $('<div></div>').selectable(),
 		actual = expected.selectable('disable');
 	equals(actual, expected, 'disable is chainable');

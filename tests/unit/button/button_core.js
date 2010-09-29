@@ -10,7 +10,7 @@ module("button: core");
 test("checkbox", function() {
 	var input = $("#check");
 		label = $("label[for=check]");
-	ok( input.is(":visible") );	
+	ok( input.is(":visible") );
 	ok( label.is(":not(.ui-button)") );
 	input.button();
 	ok( input.is(".ui-helper-hidden-accessible") );
@@ -20,7 +20,7 @@ test("checkbox", function() {
 test("radios", function() {
 	var inputs = $("#radio0 input");
 		labels = $("#radio0 label");
-	ok( inputs.is(":visible") );	
+	ok( inputs.is(":visible") );
 	ok( labels.is(":not(.ui-button)") );
 	inputs.button();
 	ok( inputs.is(".ui-helper-hidden-accessible") );
@@ -36,22 +36,22 @@ function assert(noForm, form1, form2) {
 test("radio groups", function() {
 	$(":radio").button();
 	assert(":eq(0)", ":eq(1)", ":eq(2)");
-	
+
 	// click outside of forms
 	$("#radio0 .ui-button:eq(1)").click();
 	assert(":eq(1)", ":eq(1)", ":eq(2)");
-	
+
 	// click in first form
 	$("#radio1 .ui-button:eq(0)").click();
 	assert(":eq(1)", ":eq(0)", ":eq(2)");
-	
+
 	// click in second form
 	$("#radio2 .ui-button:eq(0)").click();
 	assert(":eq(1)", ":eq(0)", ":eq(0)");
 });
 
 test("input type submit, don't create child elements", function() {
-	var input = $("#submit")
+	var input = $("#submit");
 	same( input.children().length, 0 );
 	input.button();
 	same( input.children().length, 0 );

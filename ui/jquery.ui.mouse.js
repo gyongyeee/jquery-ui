@@ -10,7 +10,7 @@
  * Depends:
  *	jquery.ui.widget.js
  */
-(function( $, undefined ) {
+(function( $ ) {
 
 $.widget("ui.mouse", {
 	options: {

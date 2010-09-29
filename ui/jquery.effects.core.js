@@ -7,7 +7,7 @@
  *
  * http://docs.jquery.com/UI/Effects/
  */
-;jQuery.effects || (function($, undefined) {
+;jQuery.effects || (function($) {
 
 $.effects = {};
 
@@ -44,28 +44,34 @@ function getRGB(color) {
 		var result;
 
 		// Check if we're already dealing with an array of colors
-		if ( color && color.constructor == Array && color.length == 3 )
-				return color;
+		if ( color && (color.constructor == Array) && (color.length == 3) ) {
+			return color;
+		}
 
 		// Look for rgb(num,num,num)
-		if (result = /rgb\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*\)/.exec(color))
-				return [parseInt(result[1],10), parseInt(result[2],10), parseInt(result[3],10)];
+		if (result = /rgb\(\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*,\s*([0-9]{1,3})\s*\)/.exec(color)) {
+			return [parseInt(result[1],10), parseInt(result[2],10), parseInt(result[3],10)];
+		}
 
 		// Look for rgb(num%,num%,num%)
-		if (result = /rgb\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*\)/.exec(color))
-				return [parseFloat(result[1])*2.55, parseFloat(result[2])*2.55, parseFloat(result[3])*2.55];
+		if (result = /rgb\(\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*,\s*([0-9]+(?:\.[0-9]+)?)\%\s*\)/.exec(color)) {
+			return [parseFloat(result[1])*2.55, parseFloat(result[2])*2.55, parseFloat(result[3])*2.55];
+		}
 
 		// Look for #a0b1c2
-		if (result = /#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})/.exec(color))
-				return [parseInt(result[1],16), parseInt(result[2],16), parseInt(result[3],16)];
+		if (result = /#([a-fA-F0-9]{2})([a-fA-F0-9]{2})([a-fA-F0-9]{2})/.exec(color)) {
+			return [parseInt(result[1],16), parseInt(result[2],16), parseInt(result[3],16)];
+		}
 
 		// Look for #fff
-		if (result = /#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/.exec(color))
-				return [parseInt(result[1]+result[1],16), parseInt(result[2]+result[2],16), parseInt(result[3]+result[3],16)];
+		if (result = /#([a-fA-F0-9])([a-fA-F0-9])([a-fA-F0-9])/.exec(color)) {
+			return [parseInt(result[1]+result[1],16), parseInt(result[2]+result[2],16), parseInt(result[3]+result[3],16)];
+		}
 
 		// Look for rgba(0, 0, 0, 0) == transparent in Safari 3
-		if (result = /rgba\(0, 0, 0, 0\)/.exec(color))
-				return colors['transparent'];
+		if (result = /rgba\(0, 0, 0, 0\)/.exec(color)) {
+			return colors['transparent'];
+		}
 
 		// Otherwise, we're most likely dealing with a named color
 		return colors[$.trim(color).toLowerCase()];
@@ -78,8 +84,9 @@ function getColor(elem, attr) {
 				color = $.curCSS(elem, attr);
 
 				// Keep going until we find an element that has color, or we hit the body
-				if ( color != '' && color != 'transparent' || $.nodeName(elem, "body") )
-						break;
+				if ( ((color != '') && (color != 'transparent')) || $.nodeName(elem, "body") ) {
+					break;
+				}
 
 				attr = "backgroundColor";
 		} while ( elem = elem.parentNode );
@@ -184,7 +191,7 @@ function getElementStyles() {
 			}
 		}
 	}
-	
+
 	return newStyle;
 }
 
@@ -194,7 +201,7 @@ function filterStyles(styles) {
 		value = styles[name];
 		if (
 			// ignore null and undefined values
-			value == null ||
+			(value == null) ||
 			// ignore functions (when does this occur?)
 			$.isFunction(value) ||
 			// shorthand styles that need to be expanded
@@ -208,7 +215,7 @@ function filterStyles(styles) {
 			delete styles[name];
 		}
 	}
-	
+
 	return styles;
 }
 
@@ -276,7 +283,7 @@ $.fn.extend({
 
 	_toggleClass: $.fn.toggleClass,
 	toggleClass: function(classNames, force, speed, easing, callback) {
-		if ( typeof force == "boolean" || force === undefined ) {
+		if ( (typeof force == "boolean") || force === undefined ) {
 			if ( !speed ) {
 				// without speed parameter;
 				return this._toggleClass(classNames, force);
@@ -306,19 +313,20 @@ $.extend($.effects, {
 	// Saves a set of properties in a data storage
 	save: function(element, set) {
 		for(var i=0; i < set.length; i++) {
-			if(set[i] !== null) element.data("ec.storage."+set[i], element[0].style[set[i]]);
+			if(set[i] !== null){element.data("ec.storage."+set[i], element[0].style[set[i]]);}
 		}
 	},
 
 	// Restores a set of previously saved properties from a data storage
 	restore: function(element, set) {
 		for(var i=0; i < set.length; i++) {
-			if(set[i] !== null) element.css(set[i], element.data("ec.storage."+set[i]));
+			if(set[i] !== null){element.css(set[i], element.data("ec.storage."+set[i]));}
 		}
 	},
 
 	setMode: function(el, mode) {
-		if (mode == 'toggle') mode = el.is(':hidden') ? 'show' : 'hide'; // Set for toggle
+		if (mode == 'toggle'){mode = el.is(':hidden') ? 'show' : 'hide'; // Set for toggle
+}
 		return mode;
 	},
 
@@ -389,8 +397,9 @@ $.extend($.effects, {
 	},
 
 	removeWrapper: function(element) {
-		if (element.parent().is('.ui-effects-wrapper'))
+		if (element.parent().is('.ui-effects-wrapper')) {
 			return element.parent().replaceWith(element);
+		}
 		return element;
 	},
 
@@ -398,7 +407,7 @@ $.extend($.effects, {
 		value = value || {};
 		$.each(list, function(i, x){
 			unit = element.cssUnit(x);
-			if (unit[0] > 0) value[x] = unit[0] * factor + unit[1];
+			if (unit[0] > 0){value[x] = unit[0] * factor + unit[1];}
 		});
 		return value;
 	}
@@ -418,7 +427,7 @@ function _normalizeArguments(effect, options, speed, callback) {
 		speed = null;
 		options = {};
 	}
-        if (typeof options == 'number' || $.fx.speeds[options]) {
+        if ((typeof options == 'number') || $.fx.speeds[options]) {
 		callback = speed;
 		speed = options;
 		options = {};
@@ -444,12 +453,12 @@ function standardSpeed( speed ) {
 	if ( !speed || typeof speed === "number" || $.fx.speeds[ speed ] ) {
 		return true;
 	}
-	
+
 	// invalid strings - treat as "normal" speed
 	if ( typeof speed === "string" && !$.effects[ speed ] ) {
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -463,7 +472,7 @@ $.fn.extend({
 				callback: args[3]
 			},
 			effectMethod = $.effects[effect];
-		
+
 		return effectMethod && !$.fx.off ? effectMethod.call(this, args2) : this;
 	},
 
@@ -505,8 +514,7 @@ $.fn.extend({
 	cssUnit: function(key) {
 		var style = this.css(key), val = [];
 		$.each( ['em','px','%','pt'], function(i, unit){
-			if(style.indexOf(unit) > 0)
-				val = [parseFloat(style), unit];
+			if(style.indexOf(unit) > 0){val = [parseFloat(style), unit];}
 		});
 		return val;
 	}
@@ -572,7 +580,9 @@ $.extend($.easing,
 		return -c *(t/=d)*(t-2) + b;
 	},
 	easeInOutQuad: function (x, t, b, c, d) {
-		if ((t/=d/2) < 1) return c/2*t*t + b;
+		if ((t/=d/2) < 1) {
+			return c/2*t*t + b;
+		}
 		return -c/2 * ((--t)*(t-2) - 1) + b;
 	},
 	easeInCubic: function (x, t, b, c, d) {
@@ -582,7 +592,9 @@ $.extend($.easing,
 		return c*((t=t/d-1)*t*t + 1) + b;
 	},
 	easeInOutCubic: function (x, t, b, c, d) {
-		if ((t/=d/2) < 1) return c/2*t*t*t + b;
+		if ((t/=d/2) < 1) {
+			return c/2*t*t*t + b;
+		}
 		return c/2*((t-=2)*t*t + 2) + b;
 	},
 	easeInQuart: function (x, t, b, c, d) {
@@ -592,7 +604,9 @@ $.extend($.easing,
 		return -c * ((t=t/d-1)*t*t*t - 1) + b;
 	},
 	easeInOutQuart: function (x, t, b, c, d) {
-		if ((t/=d/2) < 1) return c/2*t*t*t*t + b;
+		if ((t/=d/2) < 1) {
+			return c/2*t*t*t*t + b;
+		}
 		return -c/2 * ((t-=2)*t*t*t - 2) + b;
 	},
 	easeInQuint: function (x, t, b, c, d) {
@@ -602,7 +616,9 @@ $.extend($.easing,
 		return c*((t=t/d-1)*t*t*t*t + 1) + b;
 	},
 	easeInOutQuint: function (x, t, b, c, d) {
-		if ((t/=d/2) < 1) return c/2*t*t*t*t*t + b;
+		if ((t/=d/2) < 1) {
+			return c/2*t*t*t*t*t + b;
+		}
 		return c/2*((t-=2)*t*t*t*t + 2) + b;
 	},
 	easeInSine: function (x, t, b, c, d) {
@@ -621,9 +637,15 @@ $.extend($.easing,
 		return (t==d) ? b+c : c * (-Math.pow(2, -10 * t/d) + 1) + b;
 	},
 	easeInOutExpo: function (x, t, b, c, d) {
-		if (t==0) return b;
-		if (t==d) return b+c;
-		if ((t/=d/2) < 1) return c/2 * Math.pow(2, 10 * (t - 1)) + b;
+		if (t==0) {
+			return b;
+		}
+		if (t==d) {
+			return b+c;
+		}
+		if ((t/=d/2) < 1) {
+			return c/2 * Math.pow(2, 10 * (t - 1)) + b;
+		}
 		return c/2 * (-Math.pow(2, -10 * --t) + 2) + b;
 	},
 	easeInCirc: function (x, t, b, c, d) {
@@ -633,42 +655,63 @@ $.extend($.easing,
 		return c * Math.sqrt(1 - (t=t/d-1)*t) + b;
 	},
 	easeInOutCirc: function (x, t, b, c, d) {
-		if ((t/=d/2) < 1) return -c/2 * (Math.sqrt(1 - t*t) - 1) + b;
+		if ((t/=d/2) < 1) {
+			return -c/2 * (Math.sqrt(1 - t*t) - 1) + b;
+		}
 		return c/2 * (Math.sqrt(1 - (t-=2)*t) + 1) + b;
 	},
 	easeInElastic: function (x, t, b, c, d) {
 		var s=1.70158;var p=0;var a=c;
-		if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
-		if (a < Math.abs(c)) { a=c; var s=p/4; }
-		else var s = p/(2*Math.PI) * Math.asin (c/a);
+		if (t==0) {
+			return b;
+		}  if ((t/=d)==1) {
+			return b+c;
+		}  if (!p){p=d*.3;}
+		if (a < Math.abs(c)) { a=c; var s=p/4; } else {
+			var s = p/(2*Math.PI) * Math.asin (c/a);
+		}
 		return -(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
 	},
 	easeOutElastic: function (x, t, b, c, d) {
 		var s=1.70158;var p=0;var a=c;
-		if (t==0) return b;  if ((t/=d)==1) return b+c;  if (!p) p=d*.3;
-		if (a < Math.abs(c)) { a=c; var s=p/4; }
-		else var s = p/(2*Math.PI) * Math.asin (c/a);
+		if (t==0) {
+			return b;
+		}  if ((t/=d)==1) {
+			return b+c;
+		}  if (!p){p=d*.3;}
+		if (a < Math.abs(c)) { a=c; var s=p/4; } else {
+			var s = p/(2*Math.PI) * Math.asin (c/a);
+		}
 		return a*Math.pow(2,-10*t) * Math.sin( (t*d-s)*(2*Math.PI)/p ) + c + b;
 	},
 	easeInOutElastic: function (x, t, b, c, d) {
 		var s=1.70158;var p=0;var a=c;
-		if (t==0) return b;  if ((t/=d/2)==2) return b+c;  if (!p) p=d*(.3*1.5);
-		if (a < Math.abs(c)) { a=c; var s=p/4; }
-		else var s = p/(2*Math.PI) * Math.asin (c/a);
-		if (t < 1) return -.5*(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
+		if (t==0) {
+			return b;
+		}  if ((t/=d/2)==2) {
+			return b+c;
+		}  if (!p){p=d*(.3*1.5);}
+		if (a < Math.abs(c)) { a=c; var s=p/4; } else {
+			var s = p/(2*Math.PI) * Math.asin (c/a);
+		}
+		if (t < 1) {
+			return -.5*(a*Math.pow(2,10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )) + b;
+		}
 		return a*Math.pow(2,-10*(t-=1)) * Math.sin( (t*d-s)*(2*Math.PI)/p )*.5 + c + b;
 	},
 	easeInBack: function (x, t, b, c, d, s) {
-		if (s == undefined) s = 1.70158;
+		if (s == undefined){s = 1.70158;}
 		return c*(t/=d)*t*((s+1)*t - s) + b;
 	},
 	easeOutBack: function (x, t, b, c, d, s) {
-		if (s == undefined) s = 1.70158;
+		if (s == undefined){s = 1.70158;}
 		return c*((t=t/d-1)*t*((s+1)*t + s) + 1) + b;
 	},
 	easeInOutBack: function (x, t, b, c, d, s) {
-		if (s == undefined) s = 1.70158;
-		if ((t/=d/2) < 1) return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
+		if (s == undefined){s = 1.70158;}
+		if ((t/=d/2) < 1) {
+			return c/2*(t*t*(((s*=(1.525))+1)*t - s)) + b;
+		}
 		return c/2*((t-=2)*t*(((s*=(1.525))+1)*t + s) + 2) + b;
 	},
 	easeInBounce: function (x, t, b, c, d) {
@@ -686,7 +729,9 @@ $.extend($.easing,
 		}
 	},
 	easeInOutBounce: function (x, t, b, c, d) {
-		if (t < d/2) return $.easing.easeInBounce (x, t*2, 0, c, d) * .5 + b;
+		if (t < d/2) {
+			return $.easing.easeInBounce (x, t*2, 0, c, d) * .5 + b;
+		}
 		return $.easing.easeOutBounce (x, t*2-d, 0, c, d) * .5 + c*.5 + b;
 	}
 });

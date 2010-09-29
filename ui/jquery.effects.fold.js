@@ -10,7 +10,7 @@
  * Depends:
  *	jquery.effects.core.js
  */
-(function( $, undefined ) {
+(function( $ ) {
 
 $.effects.fold = function(o) {
 
@@ -32,8 +32,9 @@ $.effects.fold = function(o) {
 		var ref = widthFirst ? ['width', 'height'] : ['height', 'width'];
 		var distance = widthFirst ? [wrapper.width(), wrapper.height()] : [wrapper.height(), wrapper.width()];
 		var percent = /([0-9]+)%/.exec(size);
-		if(percent) size = parseInt(percent[1],10) / 100 * distance[mode == 'hide' ? 0 : 1];
-		if(mode == 'show') wrapper.css(horizFirst ? {height: 0, width: size} : {height: size, width: 0}); // Shift
+		if(percent){size = parseInt(percent[1],10) / 100 * distance[mode == 'hide' ? 0 : 1];}
+		if(mode == 'show'){wrapper.css(horizFirst ? {height: 0, width: size} : {height: size, width: 0}); // Shift
+}
 
 		// Animation
 		var animation1 = {}, animation2 = {};
@@ -43,9 +44,11 @@ $.effects.fold = function(o) {
 		// Animate
 		wrapper.animate(animation1, duration, o.options.easing)
 		.animate(animation2, duration, o.options.easing, function() {
-			if(mode == 'hide') el.hide(); // Hide
+			if(mode == 'hide'){el.hide(); // Hide
+}
 			$.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
-			if(o.callback) o.callback.apply(el[0], arguments); // Callback
+			if(o.callback){o.callback.apply(el[0], arguments); // Callback
+}
 			el.dequeue();
 		});
 

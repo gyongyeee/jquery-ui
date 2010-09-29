@@ -16,7 +16,7 @@
  *	jquery.ui.position.js
  *	jquery.ui.resizable.js
  */
-(function( $, undefined ) {
+(function( $ ) {
 
 var uiDialogClasses =
 		'ui-dialog ' +
@@ -101,7 +101,7 @@ $.widget("ui.dialog", {
 				.attr('tabIndex', -1).css('outline', 0).keydown(function(event) {
 					if (options.closeOnEscape && event.keyCode &&
 						event.keyCode === $.ui.keyCode.ESCAPE) {
-						
+
 						self.close(event);
 						event.preventDefault();
 					}
@@ -203,7 +203,7 @@ $.widget("ui.dialog", {
 
 	destroy: function() {
 		var self = this;
-		
+
 		if (self.overlay) {
 			self.overlay.destroy();
 		}
@@ -229,7 +229,7 @@ $.widget("ui.dialog", {
 	close: function(event) {
 		var self = this,
 			maxZ;
-		
+
 		if (false === self._trigger('beforeClose', event)) {
 			return;
 		}
@@ -512,7 +512,7 @@ $.widget("ui.dialog", {
 					at: myAt.join(" "),
 					offset: offset.join(" ")
 				};
-			} 
+			}
 
 			position = $.extend({}, $.ui.dialog.prototype.options.position, position);
 		} else {
@@ -540,7 +540,7 @@ $.widget("ui.dialog", {
 
 		$.each( options, function( key, value ) {
 			self._setOption( key, value );
-			
+
 			if ( key in sizeRelatedOptions ) {
 				resize = true;
 			}
@@ -588,11 +588,11 @@ $.widget("ui.dialog", {
 				}
 				break;
 			case "draggable":
-				var isDraggable = uiDialog.is( ":data(draggable)" )
+				var isDraggable = uiDialog.is( ":data(draggable)" );
 				if ( isDraggable && !value ) {
 					uiDialog.draggable( "destroy" );
 				}
-				
+
 				if ( !isDraggable && value ) {
 					self._makeDraggable();
 				}
@@ -602,7 +602,7 @@ $.widget("ui.dialog", {
 				break;
 			case "resizable":
 				// currently resizable, becoming non-resizable
-				var isResizable = uiDialog.is( ":data(resizable)" )
+				var isResizable = uiDialog.is( ":data(resizable)" );
 				if (isResizable && !value) {
 					uiDialog.resizable('destroy');
 				}
@@ -660,7 +660,7 @@ $.widget("ui.dialog", {
 						Math.max(options.minHeight - nonContentHeight, 0)
 				} : {
 					minHeight: 0,
-					height: Math.max(options.height - nonContentHeight, 0)				
+					height: Math.max(options.height - nonContentHeight, 0)
 			})
 			.show();
 
@@ -719,7 +719,7 @@ $.extend($.ui.dialog.overlay, {
 			$(document).bind('keydown.dialog-overlay', function(event) {
 				if (dialog.options.closeOnEscape && event.keyCode &&
 					event.keyCode === $.ui.keyCode.ESCAPE) {
-					
+
 					dialog.close(event);
 					event.preventDefault();
 				}
@@ -752,7 +752,7 @@ $.extend($.ui.dialog.overlay, {
 		}
 
 		$el.remove();
-		
+
 		// adjust the maxZ to allow other modal dialogs to continue to work (see #4309)
 		var maxZ = 0;
 		$.each(this.instances, function() {
@@ -765,7 +765,7 @@ $.extend($.ui.dialog.overlay, {
 		var scrollHeight,
 			offsetHeight;
 		// handle IE 6
-		if ($.browser.msie && $.browser.version < 7) {
+		if ($.browser.msie && ($.browser.version < 7)) {
 			scrollHeight = Math.max(
 				document.documentElement.scrollHeight,
 				document.body.scrollHeight
@@ -790,7 +790,7 @@ $.extend($.ui.dialog.overlay, {
 		var scrollWidth,
 			offsetWidth;
 		// handle IE 6
-		if ($.browser.msie && $.browser.version < 7) {
+		if ($.browser.msie && ($.browser.version < 7)) {
 			scrollWidth = Math.max(
 				document.documentElement.scrollWidth,
 				document.body.scrollWidth

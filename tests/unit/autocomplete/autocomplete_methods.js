@@ -18,7 +18,7 @@ test("destroy", function() {
 		afterHtml = afterHtml.replace(/ role=""/g, "");
 	}
 	equal( afterHtml, beforeHtml, "before/after html should be the same" );
-})
+});
 
 var data = ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby", "python", "c", "scala", "groovy", "haskell", "perl"];
 
@@ -29,15 +29,15 @@ test("search", function() {
 	});
 	ac.autocomplete("search");
 	same( $(".ui-menu .ui-menu-item").length, data.length, "all items for a blank search" );
-	
+
 	ac.val("has");
-	ac.autocomplete("search")
+	ac.autocomplete("search");
 	same( $(".ui-menu .ui-menu-item").text(), "haskell", "only one item for set input value" );
-	
+
 	ac.autocomplete("search", "ja");
 	same( $(".ui-menu .ui-menu-item").length, 2, "only java and javascript for 'ja'" );
-	
+
 	$("#autocomplete").autocomplete("destroy");
-})
+});
 
 })(jQuery);

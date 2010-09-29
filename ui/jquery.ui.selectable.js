@@ -12,7 +12,7 @@
  *	jquery.ui.mouse.js
  *	jquery.ui.widget.js
  */
-(function( $, undefined ) {
+(function( $ ) {
 
 $.widget("ui.selectable", $.ui.mouse, {
 	options: {
@@ -77,8 +77,9 @@ $.widget("ui.selectable", $.ui.mouse, {
 
 		this.opos = [event.pageX, event.pageY];
 
-		if (this.options.disabled)
+		if (this.options.disabled) {
 			return;
+		}
 
 		var options = this.options;
 
@@ -144,8 +145,9 @@ $.widget("ui.selectable", $.ui.mouse, {
 		var self = this;
 		this.dragged = true;
 
-		if (this.options.disabled)
+		if (this.options.disabled) {
 			return;
+		}
 
 		var options = this.options;
 
@@ -157,13 +159,14 @@ $.widget("ui.selectable", $.ui.mouse, {
 		this.selectees.each(function() {
 			var selectee = $.data(this, "selectable-item");
 			//prevent helper from being selected if appendTo: selectable
-			if (!selectee || selectee.element == self.element[0])
+			if (!selectee || (selectee.element == self.element[0])) {
 				return;
+			}
 			var hit = false;
 			if (options.tolerance == 'touch') {
-				hit = ( !(selectee.left > x2 || selectee.right < x1 || selectee.top > y2 || selectee.bottom < y1) );
+				hit = ( !((selectee.left > x2) || (selectee.right < x1) || (selectee.top > y2) || (selectee.bottom < y1)) );
 			} else if (options.tolerance == 'fit') {
-				hit = (selectee.left > x1 && selectee.right < x2 && selectee.top > y1 && selectee.bottom < y2);
+				hit = ((selectee.left > x1) && (selectee.right < x2) && (selectee.top > y1) && (selectee.bottom < y2));
 			}
 
 			if (hit) {

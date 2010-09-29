@@ -41,20 +41,20 @@ test("enable", function() {
 	var expected = $('#list1').accordion(),
 		actual = expected.accordion('enable');
 	equals(actual, expected, 'enable is chainable');
-	state(expected, 1, 0, 0)
+	state(expected, 1, 0, 0);
 });
 
 test("disable", function() {
 	var expected = $('#list1').accordion(),
 		actual = expected.accordion('disable');
 	equals(actual, expected, 'disable is chainable');
-	
-	state(expected, 1, 0, 0)
+
+	state(expected, 1, 0, 0);
 	expected.accordion("activate", 1);
-	state(expected, 1, 0, 0)
+	state(expected, 1, 0, 0);
 	expected.accordion("enable");
 	expected.accordion("activate", 1);
-	state(expected, 0, 1, 0)
+	state(expected, 0, 1, 0);
 });
 
 test("activate", function() {
@@ -119,7 +119,7 @@ test("resize", function() {
 		fillSpace: true
 	});
 	equalHeights(expected, 246, 258);
-	
+
 	expected.parent().height(500);
 	expected.accordion("resize");
 	equalHeights(expected, 446, 458);

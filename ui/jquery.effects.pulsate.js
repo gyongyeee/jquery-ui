@@ -10,7 +10,7 @@
  * Depends:
  *	jquery.effects.core.js
  */
-(function( $, undefined ) {
+(function( $ ) {
 
 $.effects.pulsate = function(o) {
 	return this.queue(function() {
@@ -26,7 +26,7 @@ $.effects.pulsate = function(o) {
 			animateTo = 1;
 		}
 
-		if ((mode == 'hide' && isVisible) || (mode == 'show' && !isVisible)) {
+		if (((mode == 'hide') && isVisible) || ((mode == 'show') && !isVisible)) {
 			times--;
 		}
 

@@ -10,7 +10,7 @@
  * Depends:
  *	jquery.effects.core.js
  */
-(function( $, undefined ) {
+(function( $ ) {
 
 $.effects.shake = function(o) {
 
@@ -29,8 +29,8 @@ $.effects.shake = function(o) {
 		// Adjust
 		$.effects.save(el, props); el.show(); // Save & Show
 		$.effects.createWrapper(el); // Create Wrapper
-		var ref = (direction == 'up' || direction == 'down') ? 'top' : 'left';
-		var motion = (direction == 'up' || direction == 'left') ? 'pos' : 'neg';
+		var ref = ((direction == 'up') || (direction == 'down')) ? 'top' : 'left';
+		var motion = ((direction == 'up') || (direction == 'left')) ? 'pos' : 'neg';
 
 		// Animation
 		var animation = {}, animation1 = {}, animation2 = {};
@@ -46,7 +46,8 @@ $.effects.shake = function(o) {
 		el.animate(animation1, speed, o.options.easing).
 		animate(animation, speed / 2, o.options.easing, function(){ // Last shake
 			$.effects.restore(el, props); $.effects.removeWrapper(el); // Restore
-			if(o.callback) o.callback.apply(this, arguments); // Callback
+			if(o.callback){o.callback.apply(this, arguments); // Callback
+}
 		});
 		el.queue('fx', function() { el.dequeue(); });
 		el.dequeue();

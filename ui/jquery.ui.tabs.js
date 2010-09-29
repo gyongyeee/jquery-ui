@@ -11,7 +11,7 @@
  *	jquery.ui.core.js
  *	jquery.ui.widget.js
  */
-(function( $, undefined ) {
+(function( $ ) {
 
 var tabId = 0,
 	listId = 0;
@@ -52,7 +52,7 @@ $.widget( "ui.tabs", {
 
 	_setOption: function( key, value ) {
 		if ( key == "selected" ) {
-			if (this.options.collapsible && value == this.options.selected ) {
+			if (this.options.collapsible && (value == this.options.selected) ) {
 				return;
 			}
 			this.select( value );
@@ -63,7 +63,7 @@ $.widget( "ui.tabs", {
 	},
 
 	_tabId: function( a ) {
-		return a.title && a.title.replace( /\s/g, "_" ).replace( /[^\w\u00c0-\uFFFF-]/g, "" ) ||
+		return (a.title && a.title.replace( /\s/g, "_" ).replace( /[^\w\u00c0-\uFFFF-]/g, "" )) ||
 			this.options.idPrefix + getNextTabId();
 	},
 
@@ -119,7 +119,7 @@ $.widget( "ui.tabs", {
 			var hrefBase = href.split( "#" )[ 0 ],
 				baseEl;
 			if ( hrefBase && ( hrefBase === location.toString().split( "#" )[ 0 ] ||
-					( baseEl = $( "base" )[ 0 ]) && hrefBase === baseEl.href ) ) {
+					(( baseEl = $( "base" )[ 0 ]) && hrefBase === baseEl.href) ) ) {
 				href = a.hash;
 				a.href = href;
 			}
@@ -188,7 +188,7 @@ $.widget( "ui.tabs", {
 			}
 
 			// sanity check - default to first tab...
-			o.selected = ( ( o.selected >= 0 && this.anchors[ o.selected ] ) || o.selected < 0 )
+			o.selected = ( ( (o.selected >= 0) && this.anchors[ o.selected ] ) || (o.selected < 0) )
 				? o.selected
 				: 0;
 
@@ -209,7 +209,7 @@ $.widget( "ui.tabs", {
 			this.panels.addClass( "ui-tabs-hide" );
 			this.lis.removeClass( "ui-tabs-selected ui-state-active" );
 			// check for length avoids error when initializing empty list
-			if ( o.selected >= 0 && this.anchors.length ) {
+			if ( (o.selected >= 0) && this.anchors.length ) {
 				this.panels.eq( o.selected ).removeClass( "ui-tabs-hide" );
 				this.lis.eq( o.selected ).addClass( "ui-tabs-selected ui-state-active" );
 
@@ -244,7 +244,7 @@ $.widget( "ui.tabs", {
 
 		// disable tabs
 		for ( var i = 0, li; ( li = this.lis[ i ] ); i++ ) {
-			$( li )[ $.inArray( i, o.disabled ) != -1 &&
+			$( li )[ ($.inArray( i, o.disabled ) != -1) &&
 				// TODO: use .toggleClass()
 				!$( li ).hasClass( "ui-tabs-selected" ) ? "addClass" : "removeClass" ]( "ui-state-disabled" );
 		}
@@ -541,7 +541,7 @@ $.widget( "ui.tabs", {
 
 		// If selected tab was removed focus tab to the right or
 		// in case the last tab was removed the tab to the left.
-		if ( $li.hasClass( "ui-tabs-selected" ) && this.anchors.length > 1) {
+		if ( $li.hasClass( "ui-tabs-selected" ) && (this.anchors.length > 1)) {
 			this.select( index + ( index + 1 < this.anchors.length ? 1 : -1 ) );
 		}
 
@@ -594,7 +594,7 @@ $.widget( "ui.tabs", {
 	select: function( index ) {
 		index = this._getIndex( index );
 		if ( index == -1 ) {
-			if ( this.options.collapsible && this.options.selected != -1 ) {
+			if ( this.options.collapsible && (this.options.selected != -1) ) {
 				index = this.options.selected;
 			} else {
 				return this;
@@ -614,7 +614,7 @@ $.widget( "ui.tabs", {
 		this.abort();
 
 		// not remote or from cache
-		if ( !url || this.element.queue( "tabs" ).length !== 0 && $.data( a, "cache.tabs" ) ) {
+		if ( !url || (this.element.queue( "tabs" ).length !== 0 && $.data( a, "cache.tabs" )) ) {
 			this.element.dequeue( "tabs" );
 			return;
 		}
@@ -720,7 +720,7 @@ $.extend( $.ui.tabs.prototype, {
 				var t = o.selected;
 				self.select( ++t < self.anchors.length ? t : 0 );
 			}, ms );
-			
+
 			if ( e ) {
 				e.stopPropagation();
 			}

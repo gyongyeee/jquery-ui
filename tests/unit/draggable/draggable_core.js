@@ -13,14 +13,14 @@ var drag = function(handle, dx, dy) {
 	});
 	dragged = { dx: dx, dy: dy };
 	offsetAfter = el.offset();
-}
+};
 
 var moved = function (dx, dy, msg) {
 	msg = msg ? msg + "." : "";
 	var actual = { left: offsetAfter.left, top: offsetAfter.top };
 	var expected = { left: offsetBefore.left + dx, top: offsetBefore.top + dy };
 	same(actual, expected, 'dragged[' + dragged.dx + ', ' + dragged.dy + '] ' + msg);
-}
+};
 
 function restoreScroll(what) {
 	if(what) {
@@ -43,7 +43,7 @@ test("element types", function() {
 	$.each(typeNames, function(i) {
 		var typeName = typeNames[i];
 		el = $(document.createElement(typeName)).appendTo('body');
-		(typeName == 'table' && el.append("<tr><td>content</td></tr>"));
+		((typeName == 'table') && el.append("<tr><td>content</td></tr>"));
 		el.draggable({ cancel: '' });
 		drag(el, 50, 50);
 		moved(50, 50, "&lt;" + typeName + "&gt;");

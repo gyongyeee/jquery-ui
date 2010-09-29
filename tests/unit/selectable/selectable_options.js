@@ -8,7 +8,7 @@ module("selectable: options");
 test("autoRefresh", function() {
 	expect(3);
 	el = $("#selectable1");
-	var actual, sel = $("*", el), selected = function() { actual += 1 };
+	var actual, sel = $("*", el), selected = function() { actual += 1; };
 
 	actual = 0;
 	el = $("#selectable1").selectable({ autoRefresh: false,	selected: selected });
@@ -33,7 +33,7 @@ test("autoRefresh", function() {
 test("filter", function() {
 	expect(2);
 	el = $("#selectable1");
-	var actual, sel = $("*", el), selected = function() { actual += 1 };
+	var actual, sel = $("*", el), selected = function() { actual += 1; };
 
 	actual = 0;
 	el = $("#selectable1").selectable({ filter: '.special', selected: selected });

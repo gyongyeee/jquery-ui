@@ -10,7 +10,7 @@
  * Depends:
  *	jquery.effects.core.js
  */
-(function( $, undefined ) {
+(function( $ ) {
 
 $.effects.puff = function(o) {
 	return this.queue(function() {
@@ -111,7 +111,7 @@ $.effects.size = function(o) {
 			from: {y: el.from.height / original.height, x: el.from.width / original.width},
 			to: {y: el.to.height / original.height, x: el.to.width / original.width}
 		};
-		if (scale == 'box' || scale == 'both') { // Scale the css box
+		if ((scale == 'box') || (scale == 'both')) { // Scale the css box
 			if (factor.from.y != factor.to.y) { // Vertical props scaling
 				props = props.concat(vProps);
 				el.from = $.effects.setTransition(el, vProps, factor.from.y, el.from);
@@ -123,7 +123,7 @@ $.effects.size = function(o) {
 				el.to = $.effects.setTransition(el, hProps, factor.to.x, el.to);
 			};
 		};
-		if (scale == 'content' || scale == 'both') { // Scale the content
+		if ((scale == 'content') || (scale == 'both')) { // Scale the content
 			if (factor.from.y != factor.to.y) { // Vertical props scaling
 				props = props.concat(cProps);
 				el.from = $.effects.setTransition(el, cProps, factor.from.y, el.from);
@@ -135,13 +135,13 @@ $.effects.size = function(o) {
 		el.css('overflow','hidden').css(el.from); // Shift
 
 		// Animate
-		if (scale == 'content' || scale == 'both') { // Scale the children
+		if ((scale == 'content') || (scale == 'both')) { // Scale the children
 			vProps = vProps.concat(['marginTop','marginBottom']).concat(cProps); // Add margins/font-size
 			hProps = hProps.concat(['marginLeft','marginRight']); // Add margins
 			props2 = props.concat(vProps).concat(hProps); // Concat
 			el.find("*[width]").each(function(){
 				child = $(this);
-				if (restore) $.effects.save(child, props2);
+				if (restore){$.effects.save(child, props2);}
 				var c_original = {height: child.height(), width: child.width()}; // Save original
 				child.from = {height: c_original.height * factor.from.y, width: c_original.width * factor.from.x};
 				child.to = {height: c_original.height * factor.to.y, width: c_original.width * factor.to.x};
@@ -155,7 +155,8 @@ $.effects.size = function(o) {
 				};
 				child.css(child.from); // Shift children
 				child.animate(child.to, o.duration, o.options.easing, function(){
-					if (restore) $.effects.restore(child, props2); // Restore children
+					if (restore){$.effects.restore(child, props2); // Restore children
+}
 				}); // Animate children
 			});
 		};
@@ -165,9 +166,11 @@ $.effects.size = function(o) {
 			if (el.to.opacity === 0) {
 				el.css('opacity', el.from.opacity);
 			}
-			if(mode == 'hide') el.hide(); // Hide
+			if(mode == 'hide'){el.hide(); // Hide
+}
 			$.effects.restore(el, restore ? props : props1); $.effects.removeWrapper(el); // Restore
-			if(o.callback) o.callback.apply(this, arguments); // Callback
+			if(o.callback){o.callback.apply(this, arguments); // Callback
+}
 			el.dequeue();
 		}});
 

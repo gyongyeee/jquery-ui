@@ -10,7 +10,7 @@
  * Depends:
  *	jquery.effects.core.js
  */
-(function( $, undefined ) {
+(function( $ ) {
 
 $.effects.highlight = function(o) {
 	return this.queue(function() {
@@ -37,9 +37,9 @@ $.effects.highlight = function(o) {
 				duration: o.duration,
 				easing: o.options.easing,
 				complete: function() {
-					(mode == 'hide' && elem.hide());
+					((mode == 'hide') && elem.hide());
 					$.effects.restore(elem, props);
-					(mode == 'show' && !$.support.opacity && this.style.removeAttribute('filter'));
+					((mode == 'show') && !$.support.opacity && this.style.removeAttribute('filter'));
 					(o.callback && o.callback.apply(this, arguments));
 					elem.dequeue();
 				}
